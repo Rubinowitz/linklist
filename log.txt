@@ -1,0 +1,15 @@
+PHPUnit 6.4.4 by Sebastian Bergmann and contributors.
+
+E.                                                                  2 / 2 (100%)
+
+Time: 827 ms, Memory: 12.00MB
+
+There was 1 error:
+
+1) Tests\Feature\SubmitLinksTest::link_is_not_created_with_an_invalid_url
+Error: Class 'Tests\Feature\User' not found
+
+/home/vagrant/code/linklist/tests/Feature/SubmitLinksTest.php:47
+
+ERRORS!
+Tests: 2, Assertions: 1, Errors: 1.

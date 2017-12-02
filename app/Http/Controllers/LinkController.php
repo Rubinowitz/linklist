@@ -10,8 +10,9 @@ class LinkController extends Controller
 {
     public function index()
     {
+        $links = \App\Link::all();
         $user = Auth::user();
-        return view('welcome',compact('user'));
+        return view('welcome',compact('user'), ['links' => $links]);
     }
 
     public function add()

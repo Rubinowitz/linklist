@@ -89,7 +89,7 @@
                         <a href="/link" class="btn btn-primary">Add new Link</a>
                         <table class="table">
                             <thead><tr>
-                                <th colspan="2">Links</th>
+                                <th colspan="2">Your Links</th>
                             </tr>
                             </thead>
                             <tbody>@foreach($user->links as $link)
@@ -115,6 +115,11 @@
                     @endif
 
                 </div>
+                    <div class="links">
+                        @foreach ($links as $link)
+                            <a href="{{ $link->url }}">{{ $link->title }}</a>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

@@ -9,5 +9,6 @@ $factory->define(App\Link::class, function (Faker $faker) {
         'title' => substr($faker->sentence(2), 0, -1),
         'url' => $faker->url,
         'description' => $faker->paragraph,
+        'user_id' => 1,
     ];
 });
