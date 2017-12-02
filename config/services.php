@@ -34,5 +34,29 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+	
+	'facebook' => [
+		'client_id'     => env('FB_ID'),
+		'client_secret' => env('FB_SECRET'),
+		'redirect'      => env('APP_URL') . '/oauth/facebook/callback',
+	],
+	
+	'github' => [
+		'client_id' => env('GH_ID'),
+		'client_secret' => env('GH_SECRET'),
+		'redirect' => env('APP_URL') . '/oauth/github/callback',
+	],
+	
+	'twitter' => [
+		'client_id'     => env('TW_ID'),
+		'client_secret' => env('TW_SECRET'),
+		'redirect'      => env('APP_URL') . '/oauth/twitter/callback',
+	],
+	
+	'google' => [
+		'client_id'     => env('GL_ID'),
+		'client_secret' => env('GL_SECRET'),
+		'redirect'      => env('APP_URL') . '/oauth/google/callback',
+	],
 
 ];
