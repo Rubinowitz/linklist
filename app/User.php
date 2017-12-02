@@ -27,4 +27,12 @@ class User extends Authenticatable
     {
         return is_null($val) ? asset('images/avatar-placeholder.svg') : $val;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function links()
+    {
+        return $this->hasMany(Link::class);
+    }
 }
