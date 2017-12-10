@@ -1,0 +1,23 @@
++--------+----------+-------------------------+------------------+------------------------------------------------------------------------+--------------+
+| Domain | Method   | URI                     | Name             | Action                                                                 | Middleware   |
++--------+----------+-------------------------+------------------+------------------------------------------------------------------------+--------------+
+|        | GET|HEAD | /                       |                  | App\Http\Controllers\LinkController@index                              | web          |
+|        | GET|HEAD | api/user                |                  | Closure                                                                | api,auth:api |
+|        | GET|HEAD | auth/social             | social.login     | App\Http\Controllers\Auth\SocialAuthController@show                    | web,guest    |
+|        | GET|HEAD | home                    | home             | App\Http\Controllers\HomeController@index                              | web,auth     |
+|        | POST     | link                    |                  | App\Http\Controllers\LinkController@create                             | web          |
+|        | GET|HEAD | link                    |                  | App\Http\Controllers\LinkController@add                                | web          |
+|        | POST     | link/{link}             |                  | App\Http\Controllers\LinkController@update                             | web          |
+|        | GET|HEAD | link/{link}             |                  | App\Http\Controllers\LinkController@edit                               | web          |
+|        | GET|HEAD | login                   | login            | App\Http\Controllers\Auth\LoginController@showLoginForm                | web,guest    |
+|        | POST     | login                   |                  | App\Http\Controllers\Auth\LoginController@login                        | web,guest    |
+|        | POST     | logout                  | logout           | App\Http\Controllers\Auth\LoginController@logout                       | web          |
+|        | GET|HEAD | oauth/{driver}          | social.oauth     | App\Http\Controllers\Auth\SocialAuthController@redirectToProvider      | web,guest    |
+|        | GET|HEAD | oauth/{driver}/callback | social.callback  | App\Http\Controllers\Auth\SocialAuthController@handleProviderCallback  | web,guest    |
+|        | POST     | password/email          | password.email   | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web,guest    |
+|        | POST     | password/reset          |                  | App\Http\Controllers\Auth\ResetPasswordController@reset                | web,guest    |
+|        | GET|HEAD | password/reset          | password.request | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web,guest    |
+|        | GET|HEAD | password/reset/{token}  | password.reset   | App\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web,guest    |
+|        | POST     | register                |                  | App\Http\Controllers\Auth\RegisterController@register                  | web,guest    |
+|        | GET|HEAD | register                | register         | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest    |
++--------+----------+-------------------------+------------------+------------------------------------------------------------------------+--------------+

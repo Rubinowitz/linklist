@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Auth;
 use App\User;
+use App\Role;
 use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -119,6 +120,9 @@ class SocialAuthController extends Controller
                 // user can use reset password to create a password
                 'password' => ''
             ]);
+            $user
+                ->roles()
+                ->attach(Role::where('name', 'user')->first());
         }
         // login the user
         Auth::login($user, true);
