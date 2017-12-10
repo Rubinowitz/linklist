@@ -50,10 +50,10 @@ class User extends Authenticatable
     {
         if (is_array($roles)) {
             return $this->hasAnyRole($roles) ||
-                abort(401, 'This action is unauthorized.');
+                redirect(‘/welcome’)->with('status', 'Unauthorized!');
         }
         return $this->hasRole($roles) ||
-            abort(401, 'This action is unauthorized.');
+            redirect(‘/welcome’)->with('status', 'Unauthorized!');
     }
 
     /**

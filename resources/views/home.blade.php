@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="{{ url('/submit') }}" class="btn btn-default btn-block">
+                    <a href="{{ url('/link') }}" class="btn btn-default btn-block">
                             Submit Link
                      </a>
                 </div>

@@ -30,3 +30,6 @@ Route::get('/link/{link}','LinkController@edit');
 Route::post('/link/{link}','LinkController@update');
 
 Route::get('/', 'LinkController@index');
+
+Route::put('users','UserController@store');
+Route::resource('users', 'UserController');
