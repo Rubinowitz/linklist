@@ -33,10 +33,4 @@ class HomeController extends Controller
         ->with('isLoggedIn', $isLoggedIn)
         ->with('user',\Auth::user());
     }
-    public function welcome()
-     {
-         $links = \App\Link::all();
-         $user = Auth::user();
-         return view('welcome', compact('user'), ['links' => $links]);
-     }
 }

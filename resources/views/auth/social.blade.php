@@ -28,9 +28,9 @@
                                 Login with Twitter
                             </a>
 
-                            {{--<a href="{{ route('social.oauth', 'google') }}" class="btn btn-danger btn-block">
+                            <a href="{{ route('social.oauth', 'google') }}" class="btn btn-danger btn-block">
                                 Login with Google
-                            </a>--}}
+                            </a>
 
                             <a href="{{ route('social.oauth', 'github') }}"
                                class="btn btn-default btn-block btn-success">

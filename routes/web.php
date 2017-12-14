@@ -21,7 +21,11 @@ Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderC
 
 Auth::routes();
 
-Route::get('/', 'HomeController@welcome')->name('welcome');
+Route::get('/', function () {
+$links = \App\Link::all();
+return view('welcome', ['links' => $links]);
+})->name('welcome');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/link','LinkController@create');
@@ -35,3 +39,7 @@ Route::delete('/link/{link}', 'LinkController@destroy')->name('links.destroy');
 Route::get('/links', 'LinkController@index');
 
 Route::resource('users', 'UserController');
+
+Route::prefix('api')->group(function() {
+    Route::resource('comments', 'CommentController');
+});

@@ -26,5 +26,7 @@ class UserTableSeeder extends Seeder
         $manager->password = bcrypt('secret');
         $manager->save();
         $manager->roles()->attach($role_manager);
+
+        factory(App\User::class, 20)->create();
     }
 }

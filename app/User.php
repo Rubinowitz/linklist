@@ -43,6 +43,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
     /**
      * @param string|array $roles
      */
