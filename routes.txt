@@ -15,17 +15,18 @@
 |        | GET|HEAD  | oauth/{driver}          | social.oauth     | App\Http\Controllers\Auth\SocialAuthController@redirectToProvider      | web,guest    |
 |        | GET|HEAD  | oauth/{driver}/callback | social.callback  | App\Http\Controllers\Auth\SocialAuthController@handleProviderCallback  | web,guest    |
 |        | POST      | password/email          | password.email   | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web,guest    |
-|        | GET|HEAD  | password/reset          | password.request | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web,guest    |
 |        | POST      | password/reset          |                  | App\Http\Controllers\Auth\ResetPasswordController@reset                | web,guest    |
+|        | GET|HEAD  | password/reset          | password.request | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web,guest    |
 |        | GET|HEAD  | password/reset/{token}  | password.reset   | App\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web,guest    |
 |        | POST      | register                |                  | App\Http\Controllers\Auth\RegisterController@register                  | web,guest    |
 |        | GET|HEAD  | register                | register         | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest    |
-|        | GET|HEAD  | users                   | users.index      | App\Http\Controllers\UserController@index                              | web          |
-|        | POST      | users                   | users.store      | App\Http\Controllers\UserController@store                              | web          |
-|        | GET|HEAD  | users/create            | users.create     | App\Http\Controllers\UserController@create                             | web          |
-|        | GET|HEAD  | users/{user}            | users.show       | App\Http\Controllers\UserController@show                               | web          |
-|        | PUT|PATCH | users/{user}            | users.update     | App\Http\Controllers\UserController@update                             | web          |
-|        | DELETE    | users/{user}            | users.destroy    | App\Http\Controllers\UserController@destroy                            | web          |
-|        | POST      | users/{user}/edit       |                  | App\Http\Controllers\UserController@store                              | web          |
-|        | GET|HEAD  | users/{user}/edit       | users.edit       | App\Http\Controllers\UserController@edit                               | web          |
+|        | GET|HEAD  | user/{user}/password    |                  | App\Http\Controllers\UserController@editPassword                       | web,auth     |
+|        | POST      | user/{user}/password    | users.password   | App\Http\Controllers\UserController@updatePassword                     | web,auth     |
+|        | GET|HEAD  | users                   | users.index      | App\Http\Controllers\UserController@index                              | web,auth     |
+|        | POST      | users                   | users.store      | App\Http\Controllers\UserController@store                              | web,auth     |
+|        | GET|HEAD  | users/create            | users.create     | App\Http\Controllers\UserController@create                             | web,auth     |
+|        | GET|HEAD  | users/{user}            | users.show       | App\Http\Controllers\UserController@show                               | web,auth     |
+|        | PUT|PATCH | users/{user}            | users.update     | App\Http\Controllers\UserController@update                             | web,auth     |
+|        | DELETE    | users/{user}            | users.destroy    | App\Http\Controllers\UserController@destroy                            | web,auth     |
+|        | GET|HEAD  | users/{user}/edit       | users.edit       | App\Http\Controllers\UserController@edit                               | web,auth     |
 +--------+-----------+-------------------------+------------------+------------------------------------------------------------------------+--------------+

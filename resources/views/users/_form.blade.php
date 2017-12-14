@@ -18,10 +18,5 @@
 </div>
 
 <div class="form-group">
-    {{ Form::label('password', 'Password') }} <em>*</em>
-    {{ Form::password('password', ['class' => 'form-control', 'id' => 'password']) }}
-</div>
-
-<div class="form-group">
     {{ Form::submit('Submit', ['class' => 'btn btn-success']) }}
 </div>

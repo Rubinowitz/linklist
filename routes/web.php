@@ -21,15 +21,17 @@ Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderC
 
 Auth::routes();
 
+Route::get('/', 'HomeController@welcome')->name('welcome');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/link','LinkController@add');
-Route::post('/link','LinkController@create');
+Route::get('/link','LinkController@create');
+Route::post('/link','LinkController@store');
 
 Route::get('/link/{link}','LinkController@edit');
 Route::post('/link/{link}','LinkController@update');
 
-Route::get('/', 'LinkController@index');
+Route::delete('/link/{link}', 'LinkController@destroy')->name('links.destroy');
 
-Route::put('users','UserController@store');
+Route::get('/links', 'LinkController@index');
+
 Route::resource('users', 'UserController');

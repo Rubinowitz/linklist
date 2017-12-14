@@ -10,7 +10,6 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 User Listing
-                <a href="{{ route('users.create') }}" class="btn btn-success btn-xs">Add User</a>
             </div>
             <div class="panel-body">
                 @if (count($users))
@@ -33,15 +32,17 @@
                                     <td>{{ $user->created_at->format('m-d-Y') }}</td>
                                     <td>{{ $user->updated_at->format('m-d-Y') }}</td>
                                     <td>
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success btn-xs">Edit</a>
                                         <a href="{{ route('users.show', $user->id) }}" class="btn btn-info btn-xs">View</a>
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button class="btn btn-danger btn-xs">
-                                                <span>DELETE</span>
-                                            </button>
-                                        </form>
+                                        @if ($user->userCanEdit(Auth::user()))
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success btn-xs">Edit</a>
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <button class="btn btn-danger btn-xs">
+                                                    <span>DELETE</span>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

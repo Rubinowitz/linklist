@@ -36,14 +36,15 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;<li><a href="{{ url('/users') }}">Users</a></li>
+                        <li><a href="{{ url('/users') }}">Users</a></li>
+                        <li><a href="{{ url('/links') }}">Links</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('social.login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
@@ -52,7 +53,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+
                                     <li>
+
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -63,6 +66,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    &nbsp;
                                 </ul>
                             </li>
                         @endguest

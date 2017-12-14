@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,34 +20,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
         $users = User::latest()->paginate();
-        return view('users.all', compact('users'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        return view('users.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-        $this->validate($request, $this->rules(null));
-
-        return $this->save($request, null);
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -66,8 +46,16 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $user = User::findOrFail($id);
-        return view('users.update', compact('user'));
+        if($this->checkUser($id))
+        {
+            $user = User::findOrFail($id);
+            return view('users.update', compact('user'));
+        }
+        else
+        {
+            session()->flash('status', 'Unautherized');
+            return back();
+        }
 
     }
 
@@ -78,13 +66,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user)
+    public function update(Request $request, $id)
     {
         //
-        $user->delete();
-        $this->validate($request, $this->rules($user));
 
-        return $this->save($request, $user);
+        request()->validate([
+            'name'     => 'required|min:4',
+            'email'    => ['required', Rule::unique('users')->ignore($id)],
+        ]);
+
+
+        if(User::find($id)->update($request->all()))
+            session()->flash('status', 'User updated successfully');
+        else
+            session()->flash('status', 'User updated failed');
+
+
+        return $this->index();
+
     }
 
     /**
@@ -103,47 +102,11 @@ class UserController extends Controller
             session()->flash('status', 'Unable to delete user. Please try again');
         }
 
-        return back();
+        return $this->index();
     }
 
-    /**
-     * @param null $user
-     * @return array
-     */
-    private function rules($user) {
-        $rules = [
-            'name'     => 'required|min:4',
-            'email'    => 'required|email|unique:users',
-            'password' => 'required|min:8'
-        ];
-        if ($user) {
-            $rules['email']    = 'required|email|unique:users,id,'.$user['id'];
-            $rules['password'] = 'sometimes|min:8';
-        }
-        return $rules;
-    }
-
-    /**
-     * @param $request
-     * @param null $user
-     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    private function save($request, $user) {
-        $status = "update";
-        if (!$user) {
-            $user = new User;
-            $status = "create";
-        }
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        if ($request->has('password')) {
-            $user->password = bcrypt($request->input('password'));
-        }
-        if ($user->save()) {
-            session()->flash('status', 'User '.$status.'d successfully');
-            return redirect(url('users'));
-        }
-        session()->flash('status', 'Unable to '.$status.' user. Please try again');
-        return back()->withInput();
+    private function checkUser($id)
+    {
+        return (Auth::user()->authorizeRoles('admin')) || ($id == Auth::id());
     }
 }

@@ -7,38 +7,43 @@
                 @if ($errors->has('msg'))
                     <div class="alert alert-warning">
                         {{ $errors->first('msg') }}
-                        <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                        <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span
+                                    aria-hidden="true">×</span></button>
                     </div>
                 @endif
 
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">Social Login </div>
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading text-center">Social Login</div>
 
                     <div class="panel-body">
 
-                        <p class="lead text-center">Authenticate using your social network account from one of following providers</p>
+                        <p class="lead text-center">Authenticate using your social network account from one of following
+                            providers</p>
+                        <div class="btn-group-vertical btn-group-lg">
+                            <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block">
+                                Login with Facebook
+                            </a>
 
-                        <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block">
-                            Login with Facebook
-                        </a>
+                            <a href="{{ route('social.oauth', 'twitter') }}" class="btn btn-info btn-block">
+                                Login with Twitter
+                            </a>
 
-                        <a href="{{ route('social.oauth', 'twitter') }}" class="btn btn-info btn-block">
-                            Login with Twitter
-                        </a>
+                            {{--<a href="{{ route('social.oauth', 'google') }}" class="btn btn-danger btn-block">
+                                Login with Google
+                            </a>--}}
 
-                        <a href="{{ route('social.oauth', 'google') }}" class="btn btn-danger btn-block">
-                            Login with Google
-                        </a>
-
-                        <a href="{{ route('social.oauth', 'github') }}" class="btn btn-default btn-block">
-                            Login with Github
-                        </a>
+                            <a href="{{ route('social.oauth', 'github') }}"
+                               class="btn btn-default btn-block btn-success">
+                                Login with Github
+                            </a>
+                        </div>
 
                         <hr>
-
-                        <a href="{{ route('login') }}" class="btn btn-default btn-block">
-                            Login with Email
-                        </a>
+                        <div class="btn-group-vertical btn-group-lg">
+                            <a href="{{ route('login') }}" class="btn btn-default btn-block">
+                                Login with Email
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

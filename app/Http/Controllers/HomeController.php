@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Carbon\Carbon;
+
 
 class HomeController extends Controller
 {
@@ -25,6 +28,15 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['user', 'admin ']);
-        return view('home');
+        $isLoggedIn = \Auth::check();
+        return view('home')
+        ->with('isLoggedIn', $isLoggedIn)
+        ->with('user',\Auth::user());
     }
+    public function welcome()
+     {
+         $links = \App\Link::all();
+         $user = Auth::user();
+         return view('welcome', compact('user'), ['links' => $links]);
+     }
 }

@@ -13,7 +13,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
         'avatar', 'provider_id', 'provider',
-        'access_token'
+        'access_token', 'last_login'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -49,11 +49,9 @@ class User extends Authenticatable
     public function authorizeRoles($roles)
     {
         if (is_array($roles)) {
-            return $this->hasAnyRole($roles) ||
-                redirect(‘/welcome’)->with('status', 'Unauthorized!');
+            return $this->hasAnyRole($roles);
         }
-        return $this->hasRole($roles) ||
-            redirect(‘/welcome’)->with('status', 'Unauthorized!');
+        return $this->hasRole($roles);
     }
 
     /**
@@ -74,5 +72,10 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return null !== $this->roles()->where('name', $role)->first();
+    }
+
+    public function userCanEdit(User $user)
+    {
+        return $user->authorizeRoles('admin') || $this->id == $user->id;
     }
 }

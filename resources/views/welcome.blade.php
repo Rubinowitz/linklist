@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -71,7 +72,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('social.login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
                     @endauth
                 </div>
@@ -81,43 +82,9 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
-
-                <div class="links">
-                    <div class="container">
-                    @if (Auth::check())
-                        <h2>Links List</h2>
-                        <a href="/link" class="btn btn-primary">Add new Link</a>
-                        <table class="table">
-                            <thead><tr>
-                                <th colspan="2">Your Links</th>
-                            </tr>
-                            </thead>
-                            <tbody>@foreach($user->links as $link)
-                                <tr>
-                                    <td>
-                                        {{$link->description}}
-                                    </td>
-                                    <td>
-
-                                        <form action="/link/{{$link->id}}">
-                                            <button type="submit" name="edit" class="btn btn-primary">Edit</button>
-                                            <button type="submit" name="delete" formmethod="POST" class="btn btn-danger">Delete</button>
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </td>
-                                </tr>
-
-
-                            @endforeach</tbody>
-                        </table>
-                    @else
-                        <h3>You need to log in. <a href="/login">Click here to login</a></h3>
-                    @endif
-
-                </div>
                     <div class="links">
                         @foreach ($links as $link)
-                            <a href="{{ $link->url }}">{{ $link->title }}</a>
+                            <a href="{{ $link->url }}"><img src="https://www.google.com/s2/favicons?domain={{ $link->url }}">  {{ $link->title }}</a>
                         @endforeach
                     </div>
                 </div>
