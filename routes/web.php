@@ -22,7 +22,7 @@ Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderC
 Auth::routes();
 
 Route::get('/', function () {
-$links = \App\Link::all();
+$links = \App\Link::orderBy('updated_at', 'desc')->take(10)->get();
 return view('welcome', ['links' => $links]);
 })->name('welcome');
 

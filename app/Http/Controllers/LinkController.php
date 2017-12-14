@@ -18,7 +18,7 @@ class LinkController extends Controller
 
     public function index()
     {
-        $links = \App\Link::all();
+        $links = Link::all();
         $user = Auth::user();
         return view('links.index', compact('user'), ['links' => $links]);
     }
@@ -79,7 +79,7 @@ class LinkController extends Controller
 
         $link->description = $request->description;
         $link->save();
-        session()->flash('status', 'Link updated successfully');
+        session()->flash('status', 'Link up successfully');
         return redirect('/links');
     }
 

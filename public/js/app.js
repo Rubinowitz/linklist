@@ -43123,7 +43123,7 @@ var render = function() {
             { staticClass: "list-group" },
             [
               _vm.list.length === 0
-                ? _c("li", [_vm._v("There are no comments yet!")])
+                ? _c("li", [_vm._v("There are no notes yet!")])
                 : _vm._e(),
               _vm._v(" "),
               _vm._l(_vm.list, function(comment, index) {

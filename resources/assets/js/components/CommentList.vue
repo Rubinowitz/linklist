@@ -15,7 +15,7 @@
                     </form>
                     <h4>All Notes</h4>
                     <ul class="list-group">
-                        <li v-if='list.length === 0'>There are no comments yet!</li>
+                        <li v-if='list.length === 0'>There are no notes yet!</li>
                         <li class="list-group-item" v-for="(comment, index) in list">
                             {{ comment.body }}
                             <button @click="deleteComment(comment.id)" class="btn btn-danger btn-xs pull-right">Delete
